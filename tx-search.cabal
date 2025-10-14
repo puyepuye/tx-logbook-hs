@@ -1,0 +1,51 @@
+cabal-version:      3.4
+name:               tx-search
+version:            0.1.0
+license:            BSD-3-Clause
+author:             You
+maintainer:         you@example.com
+build-type:         Simple
+
+library
+  hs-source-dirs:   src
+  exposed-modules:  Api, DB, Types
+  default-language: Haskell2010
+  ghc-options:      -Wall -Wcompat -Wincomplete-uni-patterns -Wincomplete-record-updates -Wredundant-constraints
+  build-depends:
+      base >=4.14 && <5
+    , servant >=0.20 && <0.21
+    , servant-server >=0.20 && <0.21
+    , aeson >=2 && <3
+    , bytestring
+    , text
+    , time
+    , warp
+    , containers
+    , sqlite-simple >=0.4 && <0.5
+    , directory
+    , filepath
+    , mtl
+    , transformers
+    , wai
+    , http-types
+    , unordered-containers
+    , vector
+    , case-insensitive
+
+executable tx-search
+  hs-source-dirs:   app
+  main-is:          Main.hs
+  default-language: Haskell2010
+  ghc-options:      -Wall -Wcompat -Wincomplete-uni-patterns -Wincomplete-record-updates -Wredundant-constraints
+  build-depends:
+      base >=4.14 && <5
+    , tx-search
+    , servant
+    , servant-server
+    , aeson
+    , bytestring
+    , text
+    , time
+    , warp
+    , sqlite-simple
+    , wai

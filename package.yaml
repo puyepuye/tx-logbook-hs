@@ -1,0 +1,57 @@
+name:                tx-search
+version:             0.1.0
+github:              "example/tx-search"
+license:             BSD3
+author:              "You"
+maintainer:          "you@example.com"
+extra-source-files:  ["README.md", "sql/schema.sql", "sql/seed.sql"]
+
+executables:
+  tx-search:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -Wall
+    - -Wcompat
+    - -Wincomplete-uni-patterns
+    - -Wincomplete-record-updates
+    - -Wredundant-constraints
+
+dependencies:
+- base >= 4.14 && < 5
+- servant >= 0.20 && < 0.21
+- servant-server >= 0.20 && < 0.21
+- aeson >= 2 && < 3
+- bytestring
+- text
+- time
+- warp
+- containers
+- sqlite-simple >= 0.4 && < 0.5
+- directory
+- filepath
+- mtl
+- transformers
+- wai
+- http-types
+- unordered-containers
+- vector
+- case-insensitive
+
+library:
+  source-dirs: src
+  ghc-options:
+  - -Wall
+  - -Wcompat
+  - -Wincomplete-uni-patterns
+  - -Wincomplete-record-updates
+  - -Wredundant-constraints
+  exposed-modules:
+  - Api
+  - DB
+  - Types
+  default-extensions:
+  - OverloadedStrings
+  - DeriveGeneric
+  - DataKinds
+  - TypeOperators

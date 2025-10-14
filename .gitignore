@@ -1,0 +1,50 @@
+# --- Haskell build artifacts ---
+dist/
+dist-*/
+dist-newstyle/
+.cabal-sandbox/
+cabal-dev/
+*.o
+*.hi
+*.dyn_o
+*.dyn_hi
+*.prof
+*.aux
+*.hp
+*.eventlog
+.hpc/
+.ghc.environment.*
+
+# Cabal local config / lock files
+cabal.project.local
+cabal.project.local~*
+# If you do NOT want to lock dependencies with Stack, ignore the lock:
+stack.yaml.lock
+
+# Stack work directory
+.stack-work/
+
+# Haskell Language Server / tooling
+.hls/
+.hie/
+.hie-bios/
+.hsenv/
+
+# Editor / OS files
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Logs and temp
+*.log
+*.tmp
+
+# SQLite runtime files
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# Built executables
+tx-search
