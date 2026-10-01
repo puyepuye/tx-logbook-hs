@@ -49,9 +49,8 @@ curl "http://localhost:8080/transactions?minAmount=-5000&maxAmount=-1000"
 curl "http://localhost:8080/transactions?from=2025-10-01T00:00:00Z&to=2025-10-07T23:59:59Z"
 curl "http://localhost:8080/transactions?limit=2&offset=2"
 
-# Log (create/replace) transaction with a specific ID via PUT
 # create a new transaction (auto-generated id)
-curl -X POST "http://localhost:8080/transactions" \ 
+curl -X POST "http://localhost:8080/transactions" \
 -H "Content-Type: application/json" \
 -d '{"postedAt":"2025-10-13T21:30:00Z","amountCents":-1450,"merchant":"Blue Bottle Coffee","memo":"night latte"}'
 ```
