@@ -19,13 +19,6 @@ A tiny Servant API that searches transactions with filters and pagination.
 
 ### PUT /transactions/{id}
 Create **or** replace a transaction with a specific ID (idempotent logging).
-Returns HTTP 200 for both creation and replacement. Repeating the same request
-keeps a single transaction with that ID. All fields are replaced; omitting
-`memo` or setting it to `null` clears the previous memo.
-
-### POST /transactions
-Create a transaction with an automatically generated ID. Returns HTTP 201.
-Uses the same JSON body as PUT.
 
 **Body (JSON):**
 ```json
@@ -55,11 +48,6 @@ curl "http://localhost:8080/transactions?q=Blue%20Bottle"
 curl "http://localhost:8080/transactions?minAmount=-5000&maxAmount=-1000"
 curl "http://localhost:8080/transactions?from=2025-10-01T00:00:00Z&to=2025-10-07T23:59:59Z"
 curl "http://localhost:8080/transactions?limit=2&offset=2"
-
-# Log (create/replace) transaction with a specific ID via PUT
-curl -X PUT "http://localhost:8080/transactions/42" \
-  -H "Content-Type: application/json" \
-  -d '{"postedAt":"2025-10-13T21:30:00Z","amountCents":-1450,"merchant":"Blue Bottle Coffee","memo":"night latte"}'
 
 # create a new transaction (auto-generated id)
 curl -X POST "http://localhost:8080/transactions" \

@@ -11,7 +11,7 @@ import Network.Wai (Application)
 import Servant
 import Database.SQLite.Simple (Connection)
 
-import DB (findTransactions, createTransaction, upsertTransaction)
+import DB (findTransactions, createTransaction)
 import Types
 
 type API =
@@ -27,10 +27,6 @@ type API =
   :<|> "transactions"
          :> ReqBody '[JSON] NewTransaction
          :> PostCreated '[JSON] Transaction
-  :<|> "transactions"
-         :> Capture "id" Int
-         :> ReqBody '[JSON] NewTransaction
-         :> Put '[JSON] Transaction
 
 server :: Connection -> Server API
 server conn =
@@ -42,7 +38,6 @@ server conn =
   )
   -- POST /transactions (auto-id)
   :<|> (\body -> liftIO $ createTransaction conn body)
-  :<|> (\tid body -> liftIO $ upsertTransaction conn tid body)
   where
     clamp lo hi x = max lo (min hi x)
 

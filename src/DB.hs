@@ -7,7 +7,6 @@ module DB
   , seedDb
   , findTransactions
   , createTransaction
-  , upsertTransaction
   ) where
 
 import Control.Exception (bracket)
@@ -97,16 +96,3 @@ createTransaction conn NewTransaction{ ntPostedAt = p
     ) (p, a, m, mm)
   rid <- lastInsertRowId conn
   pure $ Transaction (fromIntegral rid) p a m mm
-
--- | Atomically create or replace the fields of a transaction with a known ID.
--- ON CONFLICT updates the existing row without deleting it.
-upsertTransaction :: Connection -> Int -> NewTransaction -> IO Transaction
-upsertTransaction conn tid NewTransaction{ ntPostedAt = p
-                                        , ntAmountCents = a
-                                        , ntMerchant = m
-                                        , ntMemo = mm
-                                        } = do
-  execute conn
-    "INSERT INTO transactions (id, posted_at, amount_cents, merchant, memo) VALUES (?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET posted_at = excluded.posted_at, amount_cents = excluded.amount_cents, merchant = excluded.merchant, memo = excluded.memo"
-    (tid, p, a, m, mm)
-  pure $ Transaction tid p a m mm
